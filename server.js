@@ -23,9 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // routes
-//app.use('/', require('./routes/root'));
-//console.log(path.join(__dirname, 'views', 'index.html'));
-app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'views', 'index.html')));
+app.use('/', require('./routes/root'));
 app.use('/states', require('./routes/api/states'));
 
 
