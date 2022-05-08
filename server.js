@@ -9,7 +9,6 @@ const connectDB = require('./config/dbConn');
 
 const PORT = process.env.PORT || 3500;
 
-
 connectDB();
 
 app.use(cors())
@@ -25,7 +24,6 @@ app.use(express.json());
 // routes
 app.use('/', require('./routes/root'));
 app.use('/states', require('./routes/api/states'));
-
 
 //send 404 if error
 app.all('*', (req, res) => {

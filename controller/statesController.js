@@ -6,6 +6,7 @@ const getAllStates = async (req,res) => {
     if(req.query.contig === 'true') {
         return res.status(200).json(stateJSONData.filter(st => st.code !== 'AK' && st.code !== 'HI'));
     }
+
     //return non-contiguous states
     if(req.query.contig === 'false') {
         return res.status(200).json(stateJSONData.filter(st => st.code === 'AK' || st.code === 'HI'));
@@ -22,14 +23,10 @@ const getAllStates = async (req,res) => {
             statesArray[i].funfacts = stateExistsinMongo.funfacts
         }
     }
-
     //return all of the states with the fun facts
     res.status(200).json(statesArray);
 }
-
-
 const getState = async (req,res) => {
-
     //grab the state data using the URL parameter defined for the state
     const stateData = stateJSONData.find(st => st.code === req.params.state);
 
@@ -46,7 +43,6 @@ const getState = async (req,res) => {
     //return the state data with the fun facts
     res.status(200).json(stateData);
 }
-
 const getCapital = (req,res) => {
     //grab the state data using the URL parameter defined for the state
     const stateData = stateJSONData.find(st => st.code === req.params.state);
@@ -54,7 +50,6 @@ const getCapital = (req,res) => {
     //return the capital of the given state
     res.status(200).json({state:stateData.state, capital: stateData.capital_city});
 }
-
 const getNickname = (req,res) => {
     //grab the state data using the URL parameter defined for the state
     const stateData = stateJSONData.find(st => st.code === req.params.state);
@@ -62,7 +57,6 @@ const getNickname = (req,res) => {
     //return the nickname of the given state
     res.status(200).json({state:stateData.state, nickname: stateData.nickname});
 }
-
 const getPopulation = (req,res) => {
     //grab the state data using the URL parameter defined for the state
     const stateData = stateJSONData.find(st => st.code === req.params.state);
@@ -73,7 +67,6 @@ const getPopulation = (req,res) => {
     //return the population data of the given state
     res.status(200).json({state:stateData.state, population });
 }
-
 const getAdmissionDate = (req,res) => {
     //grab the state data using the URL parameter defined for the state
     const stateData = stateJSONData.find(st => st.code === req.params.state);
@@ -81,7 +74,6 @@ const getAdmissionDate = (req,res) => {
     //return the admission date of the given state
     res.status(200).json({state:stateData.state, admitted: stateData.admission_date });
 }
-
 const getFunFact = async (req,res) => {
     //grab the state data using the URL parameter defined for the state
     const stateData = await stateJSONData.find(st => st.code === req.params.state);
@@ -100,7 +92,6 @@ const getFunFact = async (req,res) => {
         res.status(200).json({funfact: funFactsArray[Math.floor(Math.random()*funFactsArray.length)]});
     }
 }
-
 const createNewFunFact = async (req,res) => {
     //verify that there are fun facts entered in the body 
     if(!req.body.funfacts) {
@@ -195,8 +186,6 @@ const deleteFunFact = async (req,res) => {
     const updatedArray = await stateExistsinMongo.save();
     res.status(201).json(updatedArray); 
 }
-
-
 module.exports = {
     getAllStates,
     getState,
